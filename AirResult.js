@@ -49,20 +49,20 @@ const airCases = {
     }
 }
 
-function AirResult( {name, getAqi, airQuality} ) {
+function AirResult( {airInfo} ) {
 
     return (
     <View style={styles.container}>
     <StatusBar hidden={true} />
-    <LinearGradient colors={airCases[airQuality].colors} style={styles.back}>
+    <LinearGradient colors={airCases[airInfo.quality].colors} style={styles.back}>
         <View>
-            <AntDesign color="white" size={120} name={airCases[airQuality].image} style={styles.airIcon} />
+            <AntDesign color="white" size={120} name={airCases[airInfo.quality].image} style={styles.airIcon} />
         </View>
         <View style={styles.textArea}>
-            <Text style={styles.city} >{name} </Text>
-            <Text style={styles.aqi} >  [ AQI : {getAqi} ] </Text>
-            <Text style={styles.title}>{airCases[airQuality].title}</Text>
-            <Text style={styles.desc}>{airCases[airQuality].desc}</Text>
+            <Text style={styles.city} >{airInfo.cityName}, {airInfo.country} </Text>
+            <Text style={styles.aqi} >  [ AQI : {airInfo.airIndex} ] </Text>
+            <Text style={styles.title}>{airCases[airInfo.quality].title}</Text>
+            <Text style={styles.desc}>{airCases[airInfo.quality].desc}</Text>
         </View>
     </LinearGradient>
     </View>
@@ -70,9 +70,7 @@ function AirResult( {name, getAqi, airQuality} ) {
 }
 
 AirResult.propTypes = {
-    name: PropTypes.string.isRequired,
-    getAqi: PropTypes.number.isRequired,
-    airQuality: PropTypes.string.isRequired
+    airInfo: PropTypes.object.isRequired
 }
 
 export default AirResult;
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
   },
   city : {
       textAlign: 'center',
-      fontSize: 40,
+      fontSize: 35,
       paddingBottom:10,
       color: 'white'
   },
